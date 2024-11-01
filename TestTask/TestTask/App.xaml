@@ -1,9 +1,17 @@
 ﻿<Application x:Class="TestTask.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TestTask"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:TestTask">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Buttons/Buttons.xaml" />
+                <ResourceDictionary Source="Resources/Frames/Frames.xaml" />
+                <ResourceDictionary Source="Resources/Text/TextBoxes.xaml" />
+                <ResourceDictionary Source="Resources/Text/PasswordBoxes.xaml" />
+                <ResourceDictionary Source="Resources/Modals/Modals.xaml" />
+                <ResourceDictionary Source="Resources/Common/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="TestTask.Views.Auth.AuthorizationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestTask.Views.Auth"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Style="{StaticResource Border.Panel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Content="Auth"
+                Style="{StaticResource Label.Header}"/>
+            <ContentControl Grid.Row="1">
+                <ContentControl.Resources>
+                    <local:AuthorizedView x:Key="AuthorizedView"/>
+                </ContentControl.Resources>
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <local:NoAuthorizedView DataContext="{Binding NonAuthViewModel}"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State.Value}" Value="LoggedIn">
+                                <Setter Property="Content" Value="{StaticResource AuthorizedView}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.Value}" Value="Logouting">
+                                <Setter Property="Content" Value="{StaticResource AuthorizedView}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </Grid>
+    </Border>
+</UserControl>

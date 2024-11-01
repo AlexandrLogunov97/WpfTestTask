@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:Double x:Key="Button.Mask.MouseEnter">0.4</system:Double>
+    <system:Double x:Key="Button.Mask.Clicked">0.6</system:Double>
+
+    <SolidColorBrush x:Key="Button.Default.Background" Color="DarkGray"/>
+    <SolidColorBrush x:Key="Button.Default.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="Button.Default.Disabled.Background" Color="DarkGray"/>
+    <SolidColorBrush x:Key="Button.Default.Disabled.Foreground" Color="Gray"/>
+
+    <Style x:Key="Button.Default" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{StaticResource Button.Default.Background}"/>
+        <Setter Property="Foreground" Value="{StaticResource Button.Default.Foreground}"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border 
+                            x:Name="inner"
+                            CornerRadius="5"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true"/>
+                        <Border x:Name="mask" CornerRadius="5" Background="Black" Opacity="0"/>
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Focusable="False"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="{TemplateBinding Padding}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="mask" Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="mask" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="mask" Property="Opacity" Value="0"/>
+                            <Setter Property="Background" Value="{StaticResource Button.Default.Disabled.Background}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Button.Default.Disabled.Foreground}"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetName="mask"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0"
+                                        To="{StaticResource Button.Mask.MouseEnter}"
+                                        Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                            Storyboard.TargetName="mask"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0.4"
+                                            To="0"
+                                            Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetName="mask"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="{StaticResource Button.Mask.MouseEnter}"
+                                        To="{StaticResource Button.Mask.Clicked}"
+                                        Duration="0:0:0.15"
+                                        AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button.Red" TargetType="{x:Type Button}" BasedOn="{StaticResource Button.Default}">
+        <Setter Property="Background" Value="#FFE11717"/>
+    </Style>
+
+    <Style x:Key="Button.Green" TargetType="{x:Type Button}" BasedOn="{StaticResource Button.Default}">
+        <Setter Property="Background" Value="ForestGreen"/>
+    </Style>
+</ResourceDictionary>

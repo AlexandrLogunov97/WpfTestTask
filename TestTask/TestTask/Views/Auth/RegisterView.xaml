@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="TestTask.Views.Auth.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestTask.Views.Auth"
+             xmlns:extensions="clr-namespace:TestTask.Extensions"
+             mc:Ignorable="d" 
+             Width="400"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    <Border 
+        Background="Gray"
+        CornerRadius="5"
+        BorderBrush="White"
+        Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Content="Register"
+                Style="{StaticResource Label.Header}"/>
+            <ScrollViewer 
+                Grid.Row="1"
+                VerticalScrollBarVisibility="Auto"
+                CanContentScroll="False" 
+                Margin="0,10,0,10">
+                <StackPanel >
+
+                    <Label Style="{StaticResource Label.Title}" Content="Login"/>
+                    <TextBox
+                        Style="{DynamicResource TextBox.Default}"
+                        Text="{Binding NewUser.Value.Username.Value}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.Username}"/>
+                    
+                    <Label Style="{StaticResource Label.Title}" Content="First Name"/>
+                    <TextBox
+                        Style="{DynamicResource TextBox.Default}"
+                        Text="{Binding NewUser.Value.FirstName.Value}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.FirstName}"/>
+                    
+                    <Label Style="{StaticResource Label.Title}" Content="Last Name"/>
+                    <TextBox
+                        Style="{DynamicResource TextBox.Default}"
+                        Text="{Binding NewUser.Value.LastName.Value}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.LastName}"/>
+                    
+                    <Label Style="{StaticResource Label.Title}" Content="Email"/>
+                    <TextBox
+                        Style="{DynamicResource TextBox.Default}"
+                        Text="{Binding NewUser.Value.Email.Value}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.Email}"/>
+                    
+                    <Label Style="{StaticResource Label.Title}" Content="Password"/>
+                    <PasswordBox 
+                        Style="{DynamicResource PasswordBox.Default}"
+                        extensions:PasswordBoxExtensions.BindPassword="True"
+                        extensions:PasswordBoxExtensions.BoundPassword="{Binding NewUser.Value.Password.Value, Mode=TwoWay}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.Password}"/>
+                    
+                    <Label Style="{StaticResource Label.Title}" Content="Phone"/>
+                    <TextBox
+                        Style="{DynamicResource TextBox.Default}"
+                        Text="{Binding NewUser.Value.Phone.Value}"
+                        Margin="0,0,0,10"/>
+                    <TextBlock 
+                        Style="{StaticResource Label.Validation}"
+                        DataContext="{Binding NewUser.Value.Phone}"/>
+                    
+                </StackPanel>
+            </ScrollViewer>
+            <DockPanel Grid.Row="2">
+                <Button 
+                    Content="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Style="{StaticResource Button.Default}"
+                    HorizontalAlignment="Left"/>
+                <Button 
+                    Content="Register"
+                    Command="{Binding RegisterCommand}"
+                    Style="{StaticResource Button.Green}"
+                    HorizontalAlignment="Right"/>
+            </DockPanel>
+        </Grid>
+    </Border>
+</UserControl>
